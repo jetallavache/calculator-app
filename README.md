@@ -1,4 +1,4 @@
-# Calculator
+# calculator-app
 
 ![interface](misc/img.png)
 
