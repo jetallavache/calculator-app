@@ -1,0 +1,287 @@
+#test test_shunting_yard_1
+const char input[MAXBUF] = "1+78";
+double expected_result = 79;
+double result = 0;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_2
+const char input[MAXBUF] = "5.543*78";
+double expected_result = 5.543*78;
+double result = 0;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_3
+const char input[MAXBUF] = "86656786.123123/45645.65";
+double expected_result = 1898.4675675146043;
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_4
+const char input[MAXBUF] = "100-56";
+double expected_result = 44;
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_5
+const char input[MAXBUF] = "sin(0.58)";
+double expected_result = sin(0.58);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_6
+const char input[MAXBUF] = "cos(0.12)";
+double expected_result = cos(0.12);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_7
+const char input[MAXBUF] = "tan(55555.123)";
+double expected_result = tan(55555.123);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_8
+const char input[MAXBUF] = "asin(1)";
+double expected_result = asin(1);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_9
+const char input[MAXBUF] = "acos(2)";
+double expected_result = acos(2);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_nan(result);
+
+#test test_shunting_yard_10
+const char input[MAXBUF] = "acos(0.43)";
+double expected_result = acos(0.43);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_11
+const char input[MAXBUF] = "atan(23.90009)";
+double expected_result = atan(23.90009);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_12
+const char input[MAXBUF] = "!4";
+double expected_result = tgamma(5);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_13
+const char input[MAXBUF] = "abs(-7.6)";
+double expected_result = fabs(-7.6);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_14
+const char input[MAXBUF] = "2^7^3";
+double expected_result = pow(2, pow(7, 3));
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_15
+const char input[MAXBUF] = "sqrt(7)";
+double expected_result = sqrt(7);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_16
+const char input[MAXBUF] = "ln(2.78)";
+double expected_result = log(2.78);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_17
+const char input[MAXBUF] = "lg(2.5768)";
+double expected_result = log10(2.5768);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_18
+const char input[MAXBUF] = "e";
+double expected_result = G_E;
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_19
+const char input[MAXBUF] = "pi";
+double expected_result = G_PI;
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_20
+const char input[MAXBUF] = "-3.4+(3^2.5-(12/3)*ln(sin(2)))";
+double expected_result = -3.4 + (pow(3, 2.5) - (12 / 3) * log(sin(2)));
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_21
+const char input[MAXBUF] = "3 mod 2";
+double expected_result = fmod(3, 2);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_22
+const char input[MAXBUF] = "(2+8)(9-2)";
+double expected_result = (2+8)*(9-2);
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_23
+const char input[MAXBUF] = "+8";
+double expected_result = 8;
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_24
+const char input[MAXBUF] = "23424)";
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 3);
+
+#test test_shunting_yard_25
+const char input[MAXBUF] = "sin(";
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 2);
+
+#test test_shunting_yard_26
+const char input[MAXBUF] = ".4323+";
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 1);
+
+#test test_shunting_yard_27
+const char input[MAXBUF] = "cosi(12.3)";
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 6);
+
+#test test_shunting_yard_28
+const char input[MAXBUF] = "543..3";
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 1);
+
+#test test_shunting_yard_29
+const char input[MAXBUF] = "5(43+3)";
+double result;
+double expected_result = 5*(43 + 3);
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_30
+const char input[MAXBUF] = "432)43";
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 3);
+
+#test test_shunting_yard_31
+const char input[MAXBUF] = "%2";
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 1);
+
+#test test_shunting_yard_32
+const char input[MAXBUF] = ")x";
+double result;
+int error = comp_shunting_yard(input, &result, 0);
+ck_assert_int_eq(error, 3);
+
+#test test_shunting_yard_33
+const char input[MAXBUF] = "34+x";
+double result;
+double expected_result = 34+8;
+int error = comp_shunting_yard(input, &result, 8);
+ck_assert_int_eq(error, 0);
+ck_assert_double_eq_tol(result, expected_result, EPSILON);
+
+#test test_shunting_yard_34
+char *expected = "Unknown error";
+char *error = comp_show_error(0);
+ck_assert_str_eq(error, expected);
+
+#test test_shunting_yard_35
+char *expected = "Syntax error";
+char *error = comp_show_error(1);
+ck_assert_str_eq(error, expected);
+
+#test test_shunting_yard_36
+char *expected = "Missing parenthesis";
+char *error = comp_show_error(2);
+ck_assert_str_eq(error, expected);
+
+#test test_shunting_yard_37
+char *expected = "Extra parenthesis";
+char *error = comp_show_error(3);
+ck_assert_str_eq(error, expected);
+
+#test test_shunting_yard_38
+char *expected = "Unknown character";
+char *error = comp_show_error(4);
+ck_assert_str_eq(error, expected);
+
+#test test_shunting_yard_39
+char *expected = "Empty expression";
+char *error = comp_show_error(5);
+ck_assert_str_eq(error, expected);
+
+#test test_shunting_yard_40
+char *expected = "Unknown function";
+char *error = comp_show_error(6);
+ck_assert_str_eq(error, expected);
+
+#test test_shunting_yard_41
+char *expected = "Missing function arguments";
+char *error = comp_show_error(7);
+ck_assert_str_eq(error, expected);

@@ -1,0 +1,12 @@
+#test test_shunting_yard_plot_1
+const char input[MAXBUF] = "3.56x+x^2-2";
+double expected_result;
+double result;
+double *x, *y;
+comp_shunting_yard_plot(input, 10, &x, &y);
+for (int i = 0; i < 10; i++) {
+    expected_result = 3.56 * x[i] + pow(x[i], 2) - 2;
+    ck_assert_double_eq_tol(y[i], expected_result, EPSILON);
+}
+free(x);
+free(y);
